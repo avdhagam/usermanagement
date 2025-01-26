@@ -1,5 +1,10 @@
 package com.example.ui.controller;
 
+import com.example.ui.model.requests.UserDetailsRequest;
+import com.example.ui.model.responses.UserRest;
+import com.example.ui.shared.dto.UserDto;
+import com.fasterxml.jackson.databind.util.BeanUtil;
+import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
 // RestController is used to enable the class to receive http requests
@@ -14,8 +19,16 @@ public class UserController {
     }
 
     @PostMapping
-    public String createUser(){
-        return "createUser was called";
+    public UserRest createUser(@RequestBody UserDetailsRequest userDetailsRequest){
+        UserRest response = new UserRest();
+
+        UserDto userDto = new UserDto();
+        BeanUtils.copyProperties(userDetailsRequest,userDto);
+
+        UserDto createdUser = userService.createUser(userDto);
+        BeanUtils.copyProperties(createdUser,response);
+        
+        return response;
     }
 
     @PutMapping
