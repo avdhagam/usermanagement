@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 //Dto means data transfer object, this is the obj that will be passed around bw different layers
 
+// A class implements serializable if the class is either storing or transferring smth
 @Data
 public class UserDto implements Serializable {
     @Serial
