@@ -1,10 +1,12 @@
 package com.example.ui.controller;
 
+import com.example.service.UserService;
 import com.example.ui.model.requests.UserDetailsRequest;
 import com.example.ui.model.responses.UserRest;
 import com.example.ui.shared.dto.UserDto;
 import com.fasterxml.jackson.databind.util.BeanUtil;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 // RestController is used to enable the class to receive http requests
@@ -12,6 +14,10 @@ import org.springframework.web.bind.annotation.*;
 // RequestMapping is URL and path related
 @RequestMapping("users") //  http://localhost:8080/users
 public class UserController {
+//    wires the userService object to UserController, you can also used private final as an alternative
+    @Autowired
+    UserService userService;
+
 //    Binding our method to http get req
     @GetMapping
     public String getUser(){
@@ -27,7 +33,7 @@ public class UserController {
 
         UserDto createdUser = userService.createUser(userDto);
         BeanUtils.copyProperties(createdUser,response);
-        
+
         return response;
     }
 
