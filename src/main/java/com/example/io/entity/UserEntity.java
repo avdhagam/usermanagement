@@ -22,6 +22,7 @@ public class UserEntity implements Serializable {
     @GeneratedValue
     private long id;
 
+//    UserId will be a system generated id
     @Column(nullable = false)
     private String userId;
 
