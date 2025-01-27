@@ -32,7 +32,7 @@ public class WebSecurity {
         authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
 
         http.csrf((csrf) -> csrf.disable()).authorizeHttpRequests(
-                (authz) -> authz.requestMatchers(HttpMethod.POST, "/users")
+                (authz) -> authz.requestMatchers(HttpMethod.POST, SecurityConstants.SIGN_UP_URL)
                         .permitAll()
                         .anyRequest().authenticated());
 
